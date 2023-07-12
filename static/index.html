@@ -2,6 +2,47 @@
 <html>
 <head>
   <title>X-burgir</title>
+
+  <style>
+    body {
+      background-color: #202020;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #ffffff;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    input[type="file"] {
+      background-color: #333333;
+      color: #ffffff;
+      border: none;
+      padding: 10px;
+      margin-right: 10px;
+    }
+
+    button[type="submit"] {
+      background-color: #333333;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    #response {
+      margin-top: 20px;
+      background-color: #333333;
+      color: #ffffff;
+      padding: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+
   <script>
     function sendCSV() {
       var fileInput = document.getElementById('csv-file');
@@ -29,7 +70,7 @@
 
   <form id="upload-form" enctype="multipart/form-data" onsubmit="event.preventDefault(); sendCSV();">
     <input id="csv-file" type="file" name="file" accept=".csv">
-    <button type="submit">OK</button>
+    <button type="submit">🍔</button>
   </form>
 
   <div id="response"></div>
