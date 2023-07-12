@@ -1,5 +1,6 @@
 from fastapi import APIRouter, File, UploadFile, BackgroundTasks
 import numpy as np
+from fastapi.responses import HTMLResponse
 
 router = APIRouter()
 
@@ -26,7 +27,13 @@ def get_recommendation(background_tasks: BackgroundTasks, file: UploadFile = Fil
         ucb_scores.append(score)
 
     best = names[np.array(ucb_scores).argmax()]
-
     background_tasks.add_task(file.file.close)
 
     return best
+
+
+@router.get("/", response_class=HTMLResponse)
+def serve_html():
+    with open("static/index.html", "r") as file:
+        html_content = file.read()
+    return HTMLResponse(content=html_content)

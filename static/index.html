@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>X-burgir</title>
+  <script>
+    function sendCSV() {
+      var fileInput = document.getElementById('csv-file');
+      var file = fileInput.files[0];
+      var formData = new FormData();
+      formData.append('file', file);
+
+      fetch('http://localhost:8000/suggest/', {
+        method: 'POST',
+        body: formData,
+        redirect: 'follow'
+      })
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('response').textContent = "Kokeileppa seuraavaa: " + data;
+        })
+        .catch(error => {
+          document.getElementById('response').textContent = 'Error occurred: ' + error;
+        });
+    }
+  </script>
+</head>
+<body>
+  <h1>X-burgir</h1>
+
+  <form id="upload-form" enctype="multipart/form-data" onsubmit="event.preventDefault(); sendCSV();">
+    <input id="csv-file" type="file" name="file" accept=".csv">
+    <button type="submit">OK</button>
+  </form>
+
+  <div id="response"></div>
+</body>
+</html>
